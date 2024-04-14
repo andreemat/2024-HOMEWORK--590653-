@@ -136,6 +136,7 @@ import it.uniroma3.diadia.attrezzi.Attrezzo;
 				this.partita.getGiocatore().getBorsa().addAttrezzo(attrezzo);
 				IO.mostraMessaggio("hai preso l'attrezzo: "+this.partita.getGiocatore().getBorsa().getAttrezzo(NomeAttrezzo));				
 			}
+			else IO.mostraMessaggio("Attrezzo non presente nella stanza");
 		}
 		IO.mostraMessaggio(partita.getStanzaCorrente().getDescrizione());
 		IO.mostraMessaggio(partita.getGiocatore().getBorsa().toString());
@@ -156,6 +157,7 @@ import it.uniroma3.diadia.attrezzi.Attrezzo;
 				this.partita.getStanzaCorrente().addAttrezzo(attrezzo);
 				IO.mostraMessaggio("hai posato l'attrezzo: "+ attrezzo);
 			}
+			else IO.mostraMessaggio("Attrezzo non presente nella borsa");
 		}
 		IO.mostraMessaggio(partita.getStanzaCorrente().getDescrizione());
 		IO.mostraMessaggio(partita.getGiocatore().getBorsa().toString());
