@@ -29,6 +29,8 @@ public class BorsaTest {
 	}
 	
 	
+	
+	/*TEST METODO:AddAttrezzo*/
 
 	/*Verifica che addAttrezzo ritorni false se si prova ad inserire
 	 *  un'attrezzo con peso maggiore di 10*/
@@ -55,6 +57,8 @@ public class BorsaTest {
 	}
 		
 	
+	/*TEST METODO:getPesoBorsa*/
+	
 	@Test
 	/*Funzione che verifica che il metodo getPeso
 	 *  ritorni 0 se la borsa è vuota*/
@@ -69,6 +73,10 @@ public class BorsaTest {
 		assertEquals(8,borsaConPiuAttrezzi.getPeso());
 	}
 	
+	
+	
+	
+	/*TEST METODO:getAttrezzo*/
 	
 	/*Verifica che getAttrezzo ritorni null
 	 * se non è presente*/
@@ -100,6 +108,9 @@ public class BorsaTest {
 	}
 	
 	
+	/*TEST METODO:isEmpty*/
+	
+	
 	/*Verifica che la borsa sia vuota (non ci sono attrezzi)*/
 	@Test
 	public void testIsEmpty() {
@@ -115,6 +126,10 @@ public class BorsaTest {
 	
 	
 	
+
+	/*TEST METODO: hasAttrezzo*/
+	
+
 	/*Verifica che la borsa abbia quell'attrezzo*/
 	@Test
 	public void testHasAttrezzo() {
@@ -129,14 +144,15 @@ public class BorsaTest {
 	
 	
 	
+	/*TEST METODO: removeAttrezzo*/
+	
+	
 	/*Test che verifica che removeAttrezzo ritorni Null 
 	 * se l'attrezzo non è presente*/
 	@Test
 	public void testRemoveAttrezzoBorsaNonPresente() {
 		assertNull(borsa.removeAttrezzo("Spada"));
 	}
-	
-	
 	
 	@Test
 	/*Verifica che in una borsa con 3 elementi venga rimosso 
