@@ -70,6 +70,12 @@ public class BorsaTest {
 	}
 	
 	
+	/*Verifica che getAttrezzo ritorni null
+	 * se non è presente*/
+	@Test
+	public void TestgetAttrezzoNull() {
+		assertNull(borsaConPiuAttrezzi.getAttrezzo("Forchetta"));
+	}
 	
 	/*Verifica che getAttrezzo ritorni correttamente l'attrezzo 
 	 * che si trova in prima posizione*/
@@ -126,7 +132,7 @@ public class BorsaTest {
 	/*Test che verifica che removeAttrezzo ritorni Null 
 	 * se l'attrezzo non è presente*/
 	@Test
-	public void testRemoveAttrezzoBorsaVuota() {
+	public void testRemoveAttrezzoBorsaNonPresente() {
 		assertNull(borsa.removeAttrezzo("Spada"));
 	}
 	
