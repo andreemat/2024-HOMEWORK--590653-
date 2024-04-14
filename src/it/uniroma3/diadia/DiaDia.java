@@ -119,7 +119,11 @@ import it.uniroma3.diadia.attrezzi.Attrezzo;
 		IO.mostraMessaggio(partita.getGiocatore().getBorsa().toString());
 	}
 	
-	
+	/**
+	 * Cerca di prendere un oggetto da una stanza.Se c'e' prende l'attrezzo e lo inserisce nella borsa 
+	 * (rimuovendolo dalla stanza), altrimenti stampa un messaggio di errore
+	 *
+	 */
 	public void PrendiAttrezzo(String NomeAttrezzo) {
 		if(NomeAttrezzo==null) {
 			IO.mostraMessaggio("Che attrezzo vuoi prendere? ");
@@ -137,11 +141,21 @@ import it.uniroma3.diadia.attrezzi.Attrezzo;
 		IO.mostraMessaggio(partita.getGiocatore().getBorsa().toString());
 	}
 	
+	/**
+	 * Cerca di posare un oggetto da una stanza.Se c'e' prende l'attrezzo dalla borsa e lo inserisce nella stanza 
+	 * (rimuovendolo dalla borsa), altrimenti stampa un messaggio di errore.
+	 *
+	 */
 	public void PosaAttrezzo(String NomeAttrezzo) {
-		if(this.partita.getGiocatore().getBorsa().hasAttrezzo(NomeAttrezzo)){
-			Attrezzo attrezzo=this.partita.getGiocatore().getBorsa().removeAttrezzo(NomeAttrezzo);
-			this.partita.getStanzaCorrente().addAttrezzo(attrezzo);
-			IO.mostraMessaggio("hai posato l'attrezzo: "+ attrezzo);
+		if(NomeAttrezzo==null) {
+			IO.mostraMessaggio("Che attrezzo vuoi posare? ");
+		}
+		else {
+			if(this.partita.getGiocatore().getBorsa().hasAttrezzo(NomeAttrezzo)){
+				Attrezzo attrezzo=this.partita.getGiocatore().getBorsa().removeAttrezzo(NomeAttrezzo);
+				this.partita.getStanzaCorrente().addAttrezzo(attrezzo);
+				IO.mostraMessaggio("hai posato l'attrezzo: "+ attrezzo);
+			}
 		}
 		IO.mostraMessaggio(partita.getStanzaCorrente().getDescrizione());
 		IO.mostraMessaggio(partita.getGiocatore().getBorsa().toString());
