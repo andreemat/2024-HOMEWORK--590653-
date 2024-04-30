@@ -15,17 +15,13 @@ import it.uniroma3.diadia.giocatore.Giocatore;
  */
 
 public class Partita {
-
-
-
 	private Stanza stanzaCorrente;
 	private Labirinto creastanze;
 	private boolean finita;
 	private Giocatore Giocatore1;
-
-	
-	
-	public Partita(){
+	private IO io;
+	public Partita(IO io){
+		this.io=io;
 		creastanze= new Labirinto();
 		Giocatore1=new Giocatore();
 		stanzaCorrente=creastanze.getStanzaIniziale();
@@ -69,6 +65,15 @@ public class Partita {
 	}
 	public Labirinto getLabirinto() {
 		return this.creastanze;
+	}
+	
+	public IO getIO() {
+		return this.io;
+	}
+
+	public boolean giocatoreIsVivo() {
+		return this.getGiocatore().getCfu()>0;
+
 	}
 	
 }
