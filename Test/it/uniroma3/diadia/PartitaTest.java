@@ -17,13 +17,13 @@ import it.uniroma3.diadia.ambienti.Stanza;
 public class PartitaTest {
 	
 	private Partita partita;
-
+	private IOconsole IO=new IOconsole();
 	private Stanza Stanza1;
 	private Stanza Stanza2;
 	
 	@Before
 	public void SetUp() {
-		this.partita=new Partita();
+		this.partita=new Partita(IO);
 		this.Stanza1= new Stanza("N10");
 		this.Stanza2= new Stanza("N9");
 	}
