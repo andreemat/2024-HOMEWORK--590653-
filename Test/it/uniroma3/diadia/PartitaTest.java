@@ -5,27 +5,24 @@ package it.uniroma3.diadia;
 
 import static org.junit.Assert.*;
 
-import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
-import it.uniroma3.diadia.ambienti.Stanza;
+import it.uniroma3.diadia.ambienti.StanzaProtected;
 
 
 public class PartitaTest {
 	
 	private Partita partita;
 	private IOconsole IO=new IOconsole();
-	private Stanza Stanza1;
-	private Stanza Stanza2;
+	private StanzaProtected Stanza1;
+	private StanzaProtected Stanza2;
 	
 	@Before
 	public void SetUp() {
 		this.partita=new Partita(IO);
-		this.Stanza1= new Stanza("N10");
-		this.Stanza2= new Stanza("N9");
+		this.Stanza1= new StanzaProtected("N10");
+		this.Stanza2= new StanzaProtected("N9");
 	}
 	
 	
