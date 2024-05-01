@@ -22,16 +22,31 @@ public class StanzaBloccataTest {
 		Stanza1.impostaStanzaAdiacente("sud", Stanza2);
 		Stanza1.impostaStanzaAdiacente("est", Stanza3);
 	}
+	
+	/*Metodo di test che verifica che se nella stanza non è presente 
+	 * l'attrezzo pass,non si può andare a sud,
+	 *   rimanendo nella stessa stanza*/
 
 	@Test
 	public void testStanzaBloccataDirezioneBloccata() {
 		assertEquals(Stanza1,Stanza1.getStanzaAdiacente("sud"));
 	}
+	
+	
+	/*Metodo di test che verifica che se nella stanza  è presente 
+	 * l'attrezzo pass, si può andare a sud,
+	 *   cambiando, quindi, stanza*/
+
 	@Test
 	public void testStanzaSBloccataConAttrezzoDirezioneSbloccata(){
 		Stanza1.addAttrezzo(pass);
 		assertEquals(Stanza2,Stanza1.getStanzaAdiacente("sud"));
 	}
+	
+	
+	/*Metodo di test che verifica che se nella stanza non è presente 
+	 * l'attrezzo pass, si può andare in altre direzioni,
+	 *anche se la sud è bloccata   */
 	@Test
 	public void testStanzaBloccataConAttrezzoDirezioneNonBloccata(){
 		assertEquals(Stanza3,Stanza1.getStanzaAdiacente("est"));
