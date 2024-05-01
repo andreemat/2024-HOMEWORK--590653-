@@ -26,7 +26,7 @@ public class ComandoVai implements Comando{
 		  }
 		  prossimaStanza = stanzaCorrente.getStanzaAdiacente (this.direzione);
 		  if (prossimaStanza==null) {
-			  System.out.println ("Direzione inesistente");
+			  partita.getIO().mostraMessaggio("Direzione inesistente");
 			  return;
 		  }
 		  partita.setStanzaCorrente (prossimaStanza);
