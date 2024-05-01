@@ -2,8 +2,8 @@ package it.uniroma3.diadia.ambienti;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 
 public class Labirinto {
-	private Stanza stanzaIniziale;
-	private Stanza stanzaVincente;
+	private StanzaProtected stanzaIniziale;
+	private StanzaProtected stanzaVincente;
 	
 	
 	public Labirinto() {
@@ -18,11 +18,11 @@ public class Labirinto {
 	
 	    	
 			/* crea stanze del labirinto */
-			Stanza atrio = new Stanza("Atrio");
+			StanzaProtected atrio = new StanzaProtected("Atrio");
 			StanzaBloccata aulaN11 = new StanzaBloccata("Aula N11","est","passpartout");
-			StanzaMagica aulaN10 = new StanzaMagica("Aula N10");
+			StanzaMagicaProtected aulaN10 = new StanzaMagicaProtected("Aula N10");
 			StanzaBuia laboratorio = new StanzaBuia("Laboratorio Campus","lanterna");
-			Stanza biblioteca = new Stanza("Biblioteca");
+			StanzaProtected biblioteca = new StanzaProtected("Biblioteca");
 			
 			/* collega le stanze */
 			atrio.impostaStanzaAdiacente("nord", biblioteca);
@@ -49,11 +49,11 @@ public class Labirinto {
 			stanzaVincente = biblioteca;
 	}
 	
-	public Stanza getStanzaVincente() {
+	public StanzaProtected getStanzaVincente() {
 		return this.stanzaVincente;
 	}
 
-	public Stanza getStanzaIniziale() {
+	public StanzaProtected getStanzaIniziale() {
 		return this.stanzaIniziale;
 	}
 	

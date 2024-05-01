@@ -1,7 +1,8 @@
 package it.uniroma3.diadia.comandi;
 
 import it.uniroma3.diadia.Partita;
-import it.uniroma3.diadia.ambienti.Stanza;
+
+import it.uniroma3.diadia.ambienti.StanzaProtected;
 
 public class ComandoVai implements Comando{
 	
@@ -17,8 +18,8 @@ public class ComandoVai implements Comando{
 	    */
 	  @Override
 	  public void esegui(Partita partita) {
-		  Stanza stanzaCorrente = partita.getStanzaCorrente ();
-		  Stanza prossimaStanza = null;
+		  StanzaProtected stanzaCorrente = partita.getStanzaCorrente ();
+		  StanzaProtected prossimaStanza = null;
 		  if (direzione==null) {
 			  partita.getIO().mostraMessaggio("Dove vuoi andare? Devi specificare una direzione");
 					  return;
