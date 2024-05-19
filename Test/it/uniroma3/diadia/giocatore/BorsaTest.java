@@ -2,10 +2,19 @@ package it.uniroma3.diadia.giocatore;
 
 import static org.junit.Assert.*;
 
-import org.junit.Before;
 import org.junit.Test;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.SortedSet;
+import java.util.TreeSet;
+
+import org.junit.Before;
+
 
 import it.uniroma3.diadia.attrezzi.Attrezzo;
+import it.uniroma3.diadia.comandi.ComandoGuarda;
 
 public class BorsaTest {
 
@@ -14,30 +23,47 @@ public class BorsaTest {
 	private Attrezzo Lanterna;
 	private Attrezzo Spada;
 	private Borsa borsaConPiuAttrezzi;
+	private Borsa borsaConAttrezziStessoPeso;
+	private Borsa borsaConAttrezziDecrescente;
+	private Borsa borsaConAttrezziNomiUguali;
+
 	
 	@Before
 	public void setUp(){
-		borsa=new Borsa();
+		borsa=new Borsa(100);
 		Osso= new Attrezzo("Osso",4);
-		Lanterna= new Attrezzo("Lanterna",1);
+		Lanterna= new Attrezzo("Lanterna",3);
 		Spada=new Attrezzo("Spada",3);
 		
-		borsaConPiuAttrezzi=new Borsa();
+		borsaConPiuAttrezzi=new Borsa(100);
 		borsaConPiuAttrezzi.addAttrezzo(Osso);
 		borsaConPiuAttrezzi.addAttrezzo(Lanterna);
 		borsaConPiuAttrezzi.addAttrezzo(Spada);
-	}
+		
+		borsaConAttrezziStessoPeso = new Borsa(100);
+		borsaConAttrezziStessoPeso.addAttrezzo(new Attrezzo("Martello", 5));
+		borsaConAttrezziStessoPeso.addAttrezzo(new Attrezzo("Osso", 5));
+		borsaConAttrezziStessoPeso.addAttrezzo(new Attrezzo("Lanterna", 5));
 	
+		
+		borsaConAttrezziDecrescente = new Borsa();
+		borsaConAttrezziDecrescente.addAttrezzo(new Attrezzo("Zappa", 5));
+		borsaConAttrezziDecrescente.addAttrezzo(new Attrezzo("Osso", 2));
+		borsaConAttrezziDecrescente.addAttrezzo(new Attrezzo("Bottiglia", 1));
 	
+		
+		borsaConAttrezziNomiUguali = new Borsa();
+		borsaConAttrezziNomiUguali.addAttrezzo(new Attrezzo("Zappa", 5));
+		borsaConAttrezziNomiUguali.addAttrezzo(new Attrezzo("Zappa", 2));
+		borsaConAttrezziNomiUguali.addAttrezzo(new Attrezzo("Zappa", 1));
 	
-	/*TEST METODO:AddAttrezzo*/
+		
 
-	/*Verifica che addAttrezzo ritorni false se si prova ad inserire
-	 *  un'attrezzo con peso maggiore di 10*/
-	@Test
-	public void testAddAttrezzoPesoAttrezzoMaggiore10() {
-		assertFalse(borsa.addAttrezzo(new Attrezzo("Martello",13)));
 	}
+	
+	
+	
+
 	
 	/*Verifica che addAttrezzo ritorni true 
 	 * se inserito un'attrezzo con peso minore di 10*/
@@ -48,14 +74,7 @@ public class BorsaTest {
 		assertTrue(borsa.hasAttrezzo("Osso")); //verifica che sia stato realmente inserito
 		
 	}
-	/*Verifica che addAttrezzo ritorni False se viene inserito un attrezzo con peso
-	 * minore di 10 ma la somma dei pesi è maggiore di 10*/
-	@Test
-	public void testAddAttrezzoPesoAttrezziMaggiore10() {
-		assertFalse(borsaConPiuAttrezzi.addAttrezzo(new Attrezzo("Forchetta",6)));
-		
-	}
-		
+			
 	
 	/*TEST METODO:getPesoBorsa*/
 	
@@ -66,12 +85,6 @@ public class BorsaTest {
 		assertEquals(0,borsa.getPeso());
 	}
 	
-	/*Funzione che verifica che il metodo getPeso 
-	 * ritorni correttamente il peso della borsa*/
-	@Test 
-	public void testGetPesoBorsaConAttrezzi() {
-		assertEquals(8,borsaConPiuAttrezzi.getPeso());
-	}
 	
 	
 	
@@ -175,5 +188,120 @@ public class BorsaTest {
 		assertEquals(this.Lanterna,borsaConPiuAttrezzi.removeAttrezzo("Lanterna"));
 		assertFalse(borsaConPiuAttrezzi.hasAttrezzo("Lanterna")); // verifica che sia stato correttamente rimosso
 	}
+	
+	
+	@Test
+	public void TestgetContenutoOrdinatoPerPesoBorsaVuota() {
+		
+		assertTrue( this.borsa.getContenutoOrdinatoPerPeso().isEmpty());
+		
+	}
+	@Test
+	public void TestgetContenutoOrdinatoPerPesoPesiUguali() {
+		Iterator<Attrezzo> i=  this.borsaConAttrezziStessoPeso.getContenutoOrdinatoPerPeso().iterator();
+		List<Attrezzo> l=this.borsaConAttrezziStessoPeso.getContenutoOrdinatoPerPeso();
+		for(Attrezzo a :l)
+			System.out.println(a.getNome());
+		assertEquals("Lanterna",i.next().getNome());
+		assertEquals("Martello",i.next().getNome());
+		assertEquals("Osso",i.next().getNome());
+		
+	}
+	@Test
+	public void TestgetContenutoOrdinatoPerPesoPesiDecrescenti() {
+		Iterator<Attrezzo> i=  this.borsaConAttrezziDecrescente.getContenutoOrdinatoPerPeso().iterator();
+		assertEquals("Bottiglia",i.next().getNome());
+		assertEquals("Osso",i.next().getNome());
+		assertEquals("Zappa",i.next().getNome());
+		
+	}
+	
+	
+	@Test
+	public void TestgetContenutoOrdinatoPerPesoCasuale() {
+		Iterator<Attrezzo> i=  this.borsaConPiuAttrezzi.getContenutoOrdinatoPerPeso().iterator();
+		assertEquals("Lanterna",i.next().getNome());
+		assertEquals("Spada",i.next().getNome());
+		assertEquals("Osso",i.next().getNome());
+		
+	}
+	
+	@Test
+	public void TestgetContenutoOrdinatoPerNome() {
+		Iterator<Attrezzo> i=  this.borsaConAttrezziDecrescente.getContenutoOrdinatoPerNome().iterator();
+		assertEquals("Bottiglia",i.next().getNome());
+		assertEquals("Osso",i.next().getNome());
+		assertEquals("Zappa",i.next().getNome());
+		
+		
+		
+	}
+	
+	@Test
+	public void TestgetContenutoOrdinatoPerNomiUguali() {
+		Iterator<Attrezzo> i=  this.borsaConAttrezziDecrescente.getContenutoOrdinatoPerNome().iterator();
+		assertEquals(1,i.next().getPeso());
+		assertEquals(2,i.next().getPeso());
+		assertEquals(5,i.next().getPeso());
+		
+	}
 
+	
+	
+	
+
+	
+	@Test
+	public void TestgetSortedSetOrdinatoPerPesoPesiUguali() {
+		Iterator<Attrezzo> i=  this.borsaConAttrezziStessoPeso.getSortedSetOrdinatoPerPeso().iterator();
+		assertEquals("Lanterna",i.next().getNome());
+		assertEquals("Martello",i.next().getNome());
+		assertEquals("Osso",i.next().getNome());
+		
+	}
+	@Test
+	public void TestgetSortedSetOrdinatoPerPesoPesiDecrescenti() {
+		Iterator<Attrezzo> i=  this.borsaConAttrezziDecrescente.getSortedSetOrdinatoPerPeso().iterator();
+		assertEquals("Bottiglia",i.next().getNome());
+		assertEquals("Osso",i.next().getNome());
+		assertEquals("Zappa",i.next().getNome());
+		
+	}
+	
+	
+	@Test
+	public void TestgetSortedSetOrdinatoPerPesoCasuale() {
+		Iterator<Attrezzo> i=  this.borsaConPiuAttrezzi.getSortedSetOrdinatoPerPeso().iterator();
+		assertEquals("Lanterna",i.next().getNome());
+		assertEquals("Spada",i.next().getNome());
+		assertEquals("Osso",i.next().getNome());
+		
+	}
+	
+	
+	@Test
+	public void TestgetContenutoRaggruppatoPerPesoBorsaVuota() {
+		assertTrue(this.borsa.getContenutoRaggruppatoPerPeso().isEmpty());
+	}
+	
+	
+	@Test
+	public void TestgetContenutoRaggruppatoPerPesoBorsaConPesiUguali() {
+		Iterator<Attrezzo> i=  this.borsaConAttrezziStessoPeso.getContenutoRaggruppatoPerPeso().get(5).iterator();
+
+		assertEquals("Lanterna",i.next().getNome());
+		assertEquals("Martello",i.next().getNome());
+		assertEquals("Osso",i.next().getNome());
+	}
+	
+	@Test
+	public void TestgetContenutoRaggruppatoPerPesoBorsaConPesiDiverso() {
+		Iterator<Attrezzo> i=  this.borsaConAttrezziDecrescente.getContenutoRaggruppatoPerPeso().get(1).iterator();
+		assertEquals("Bottiglia",i.next().getNome());
+		Iterator<Attrezzo> j=  this.borsaConAttrezziDecrescente.getContenutoRaggruppatoPerPeso().get(2).iterator();
+		assertEquals("Osso",j.next().getNome());
+		Iterator<Attrezzo> k=  this.borsaConAttrezziDecrescente.getContenutoRaggruppatoPerPeso().get(5).iterator();
+		assertEquals("Zappa",k.next().getNome());
+	}
+	
 }

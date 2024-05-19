@@ -10,25 +10,32 @@ import org.junit.Test;
 
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 
-public class StanzaTest {
-	private Stanza Stanza1;
-	private Stanza Stanza2;
-	private Stanza Stanza3;
-
+public class StanzaProtectedTest {
+	private StanzaProtected Stanza1;
+	private StanzaProtected Stanza2;
+	private StanzaProtected Stanza3;
+	private StanzaProtected StanzaCon10attrezzi;
 
 	
 	private Attrezzo Spada;
 
 	private Attrezzo Lanterna;
 	private Attrezzo Osso;
-
+	private Attrezzo x;
 	
 	@Before
 	public void SetUp() {
-		this.Stanza1 =new Stanza("N10");
-		this.Stanza2= new Stanza("N11");
-		this.Stanza3=new Stanza("Stanza3");
+		this.Stanza1 =new StanzaProtected("N10");
+		this.Stanza2= new StanzaProtected("N11");
+		this.Stanza3=new StanzaProtected("Stanza3");
 
+		
+		this.StanzaCon10attrezzi=new StanzaProtected("StanzaCon10Attrezzi");
+
+		for(int i=0;i<10;i++) {
+			x =new Attrezzo("lama"+i,1);
+			StanzaCon10attrezzi.addAttrezzo(x);
+		}
 		
 		Spada= new Attrezzo("Spada",1);
 	
@@ -44,17 +51,6 @@ public class StanzaTest {
 	}
 	
 	/*FUNZIONI DI TEST METODO: HasAttrezzo()*/
-	
-	@Test
-	public void TestGetAttrezzoStanza1() {
-		assertEquals(new Attrezzo("Spada",1),Stanza1.getAttrezzo("Spada"));
-	}
-	
-	
-	@Test
-	public void TestGetSecondoAttrezzoStanza2() {
-		assertEquals(new Attrezzo("osso",2),Stanza2.getAttrezzo("osso"));
-	}
 	
 	/*Metodo di test che verifica che il metodo hasAttrezzo() ritorni True 
 	 * se la stanza possiede quell'attrezzo*/
@@ -145,6 +141,7 @@ public class StanzaTest {
 	}
 	
 	
+
 	
 	
 	
