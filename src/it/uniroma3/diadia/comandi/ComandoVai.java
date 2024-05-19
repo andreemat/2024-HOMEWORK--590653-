@@ -7,8 +7,10 @@ public class ComandoVai implements Comando{
 	
 	private String direzione;
 	private String nome;
+
 	  public ComandoVai() {
 		  this.nome="vai";
+		  
 	      
 	    
 	}

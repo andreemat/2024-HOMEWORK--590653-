@@ -8,13 +8,15 @@ public class Labirinto {
 	
 	public Labirinto() {
 		init();
+		
 	}
 	
-	private void init(){
+	public void init(){
 			/* crea gli attrezzi */
-	    	Attrezzo lanterna = new Attrezzo("lanterna",3);
+	    	Attrezzo lanterna = new Attrezzo("Lanterna",3);
 			Attrezzo osso = new Attrezzo("osso",1);
 			Attrezzo passpartout= new Attrezzo("passpartout",1);
+			Attrezzo martello = new Attrezzo("Martello",3);
 	
 	    	
 			/* crea stanze del labirinto */
@@ -42,6 +44,7 @@ public class Labirinto {
 			aulaN10.addAttrezzo(lanterna);
 			atrio.addAttrezzo(osso);
 			atrio.addAttrezzo(passpartout);
+			aulaN10.addAttrezzo(martello);
 
 
 			// il gioco comincia nell'atrio
@@ -55,6 +58,13 @@ public class Labirinto {
 
 	public Stanza getStanzaIniziale() {
 		return this.stanzaIniziale;
+	}
+	
+	public void SetStanzaIniziale(Stanza StanzaIniziale) {
+		this.stanzaIniziale=StanzaIniziale;
+	}
+	public void SetStanzaVincente(Stanza StanzaVincente) {
+		this.stanzaVincente=StanzaVincente;
 	}
 	
 }

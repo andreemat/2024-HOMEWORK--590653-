@@ -3,6 +3,7 @@ package it.uniroma3.diadia;
 
 
 import it.uniroma3.diadia.ambienti.Labirinto;
+import it.uniroma3.diadia.ambienti.LabirintoBuilder;
 import it.uniroma3.diadia.ambienti.Stanza;
 import it.uniroma3.diadia.giocatore.Giocatore;
 
@@ -22,13 +23,24 @@ public class Partita {
 	private IO io;
 	public Partita(IO io){
 		this.io=io;
-		creastanze= new Labirinto();
+		this.creastanze = new Labirinto();
+		this.creastanze.init();
 		Giocatore1=new Giocatore();
 		stanzaCorrente=creastanze.getStanzaIniziale();
 		this.finita = false;
 		
 	}
-
+	
+	public Partita(IO io,Labirinto labirinto){
+		this.io=io;
+		this.creastanze =labirinto;
+		
+		Giocatore1=new Giocatore();
+		stanzaCorrente=creastanze.getStanzaIniziale();
+		this.finita = false;
+		
+	}
+	
 	/**
 	 * Restituisce vero se e solo se la partita e' stata vinta
 	 * @return vero se partita vinta
@@ -75,5 +87,10 @@ public class Partita {
 		return this.getGiocatore().getCfu()>0;
 
 	}
+	
+	public void setLabirinto(Labirinto Labirinto) {
+		this.creastanze= Labirinto;
+	}
+	
 	
 }
