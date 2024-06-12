@@ -1,0 +1,11 @@
+Stanze: N10, N11, N9
+Stanze magiche: biblioteca 5
+Stanze buie: 
+Stanze bloccate: 
+Inizio: biblioteca
+Vincente: N9
+Attrezzi: martello 10 biblioteca, osso 2 N10, spada 5 N11, bottiglia 6 N11
+Uscite: biblioteca nord N10, biblioteca sud N11, N10 est N11
+Maghi: Merlino 'ciao sono il mago mago merlino' ampolla 5 biblioteca
+Cani: 
+Streghe: Sissy 'Ciao sono sissy' N10
