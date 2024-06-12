@@ -9,20 +9,20 @@ import it.uniroma3.diadia.IO;
 import it.uniroma3.diadia.IOconsole;
 import it.uniroma3.diadia.Partita;
 import it.uniroma3.diadia.ambienti.Labirinto;
-import it.uniroma3.diadia.ambienti.LabirintoBuilder;
+import it.uniroma3.diadia.ambienti.Labirinto.LabirintoBuilder;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
-import it.uniroma3.diadia.comandi.ComandoPosa;
+
 
 public class ComandoPosaTest {
 	Partita partita;
-	ComandoPosa posa;
+	AbstractComando posa;
 	IO io;
 	Attrezzo coltello;
-	private Labirinto labirinto;
+	private Labirinto.LabirintoBuilder labirinto;
 	@Before
 	public void setUp() throws Exception {
 		io=new IOconsole();
-		labirinto = new LabirintoBuilder()
+		labirinto = (LabirintoBuilder) new Labirinto.LabirintoBuilder()
 				.addStanzaIniziale("LabCampusOne") 
 				.addAttrezzo("Scopa",2)
 				.addStanza("Stanza2") 
@@ -33,7 +33,9 @@ public class ComandoPosaTest {
 				.getLabirinto();
 		partita=new Partita(io,labirinto);
 		posa= new ComandoPosa();
+		
 		coltello= new Attrezzo("coltello",1);
+		
 		partita.getGiocatore().getBorsa().addAttrezzo(coltello);
 		
 	}

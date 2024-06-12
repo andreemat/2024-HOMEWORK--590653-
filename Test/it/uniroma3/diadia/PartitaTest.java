@@ -5,12 +5,14 @@ package it.uniroma3.diadia;
 
 import static org.junit.Assert.*;
 
-import org.junit.After;
-import org.junit.AfterClass;
+import java.io.IOException;
+
+
 import org.junit.Before;
-import org.junit.BeforeClass;
+
 import org.junit.Test;
 
+import it.uniroma3.diadia.ambienti.FormatoFileNonValidoException;
 import it.uniroma3.diadia.ambienti.Stanza;
 
 
@@ -22,7 +24,7 @@ public class PartitaTest {
 	private Stanza Stanza2;
 	
 	@Before
-	public void SetUp() {
+	public void SetUp() throws FormatoFileNonValidoException, IOException {
 		this.partita=new Partita(IO);
 		this.Stanza1= new Stanza("N10");
 		this.Stanza2= new Stanza("N9");

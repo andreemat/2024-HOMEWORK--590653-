@@ -2,6 +2,9 @@ package it.uniroma3.diadia.giocatore;
 
 import static org.junit.Assert.*;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -9,15 +12,14 @@ public class GiocatoreTest {
 	
 	private Giocatore giocatore1;
 	@Before
-	public void setUp(){
+	public void setUp() throws FileNotFoundException, IOException{
 		giocatore1=new Giocatore();
-		
+	
 	}
 
 	/*Test che verifica che getCFU ritorni i cfu iniziali*/
 	@Test
 	public void testgetCfu() {
-		
 		assertEquals(20,giocatore1.getCfu());
 		
 	}

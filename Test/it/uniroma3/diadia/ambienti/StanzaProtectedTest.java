@@ -2,10 +2,9 @@ package it.uniroma3.diadia.ambienti;
 
 import static org.junit.Assert.*;
 
-import org.junit.After;
-import org.junit.AfterClass;
+
 import org.junit.Before;
-import org.junit.BeforeClass;
+
 import org.junit.Test;
 
 import it.uniroma3.diadia.attrezzi.Attrezzo;

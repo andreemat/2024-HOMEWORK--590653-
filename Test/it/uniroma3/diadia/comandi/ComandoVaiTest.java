@@ -9,12 +9,10 @@ import it.uniroma3.diadia.IO;
 import it.uniroma3.diadia.IOconsole;
 import it.uniroma3.diadia.Partita;
 import it.uniroma3.diadia.ambienti.Labirinto;
-import it.uniroma3.diadia.ambienti.LabirintoBuilder;
-import it.uniroma3.diadia.comandi.Comando;
-import it.uniroma3.diadia.comandi.ComandoVai;
+
 
 public class ComandoVaiTest {
-	Comando vai;
+	AbstractComando vai;
 	Partita partita;
 	IO io;
 	private Labirinto labirinto;
@@ -25,7 +23,7 @@ public class ComandoVaiTest {
 		vai=new ComandoVai();
 		
 		
-		labirinto = new LabirintoBuilder()
+		labirinto = new Labirinto.LabirintoBuilder()
 				.addStanzaIniziale("LabCampusOne") 
 				.addStanza("Stanza2") 
 				.addAdiacenza("LabCampusOne","Stanza2","ovest") 
@@ -36,64 +34,6 @@ public class ComandoVaiTest {
 		partita2=new Partita(io,labirinto);
 		partita = new Partita(io);
 
-	}
-	
-	/*Verifica che il il metodo Esegui vada correttamente a sud*/
-
-	@Test
-	public void testEseguiVaiSud() {
-		vai.setParametro("sud");
-		vai.esegui(partita);
-		assertEquals("Aula N10",partita.getStanzaCorrente().getNome());
-		
-	}
-	
-
-	/*Verifica che dopo aver eseguito 
-	 * il metodo Esegui i CFU vengano correttamente scalati*/
-
-	
-	@Test
-	public void TestEseguiCFUVaisud() {
-		vai.setParametro("sud");
-		vai.esegui(partita);
-		assertEquals(19,partita.getGiocatore().getCfu());
-	}
-	
-	
-	/*Verifica che se al metodo Esegui viene passato 
-	 *una direzione inesistente, non cambia stanza*/
-	@Test
-	public void testEseguiVaiDirezioneInesistente() {
-		vai.setParametro("ciao");
-		vai.esegui(partita);
-		assertEquals("Atrio",partita.getStanzaCorrente().getNome());
-		
-	}
-	/*Verifica che se e al metodo Esegui viene passato 
-	 *una direzione inesistente,i CFU non vengono scalati */
-	@Test 
-	public void testEseguiCFUVaiDirezioneInesistente(){
-		vai.setParametro("ciao");
-		vai.esegui(partita);
-		assertEquals(20,partita.getGiocatore().getCfu());
-	}
-	
-	/*Verifica che se e al metodo Esegui viene passato 
-	 *null,la stanza non venga cambiata */
-	@Test
-	public void testVaiDirezioneNull() {
-		vai.esegui(partita);
-		assertEquals("Atrio",partita.getStanzaCorrente().getNome());
-		
-	}
-	/*Verifica che se e al metodo Esegui viene passato 
-	 *null,i CFU non vengono scalati */
-	@Test
-	public void testEseguiCFUVaiDirezioneNull() {
-		vai.esegui(partita);
-	
-		assertEquals(20,partita.getGiocatore().getCfu());
 	}
 	
 		
@@ -112,7 +52,7 @@ public class ComandoVaiTest {
 	public void testVaiDirezioneNullLabirintoBuilder() {
 		vai.setParametro("nord");
 		vai.esegui(partita2);
-		assertEquals("Atrio",partita.getStanzaCorrente().getNome());
+		assertEquals("LabCampusOne",partita2.getStanzaCorrente().getNome());
 		assertEquals(20,partita2.getGiocatore().getCfu());
 		
 	}

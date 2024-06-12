@@ -9,9 +9,9 @@ import it.uniroma3.diadia.IO;
 import it.uniroma3.diadia.IOconsole;
 import it.uniroma3.diadia.Partita;
 import it.uniroma3.diadia.ambienti.Labirinto;
-import it.uniroma3.diadia.ambienti.LabirintoBuilder;
+
 import it.uniroma3.diadia.attrezzi.Attrezzo;
-import it.uniroma3.diadia.comandi.ComandoPrendi;
+
 
 public class ComandoPrendiTest {
 	Partita partita;
@@ -22,7 +22,7 @@ public class ComandoPrendiTest {
 	@Before
 	public void setUp() throws Exception {
 		io=new IOconsole();
-		labirinto = new LabirintoBuilder()
+		labirinto = new Labirinto.LabirintoBuilder()
 				.addStanzaIniziale("LabCampusOne") 
 				.addAttrezzo("Scopa",2)
 				.addStanza("Stanza2") 

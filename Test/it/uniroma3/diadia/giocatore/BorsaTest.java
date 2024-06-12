@@ -3,18 +3,17 @@ package it.uniroma3.diadia.giocatore;
 import static org.junit.Assert.*;
 
 import org.junit.Test;
+
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.SortedSet;
-import java.util.TreeSet;
 
 import org.junit.Before;
 
 
 import it.uniroma3.diadia.attrezzi.Attrezzo;
-import it.uniroma3.diadia.comandi.ComandoGuarda;
+
 
 public class BorsaTest {
 
@@ -29,7 +28,7 @@ public class BorsaTest {
 
 	
 	@Before
-	public void setUp(){
+	public void setUp() throws FileNotFoundException, IOException{
 		borsa=new Borsa(100);
 		Osso= new Attrezzo("Osso",4);
 		Lanterna= new Attrezzo("Lanterna",3);
