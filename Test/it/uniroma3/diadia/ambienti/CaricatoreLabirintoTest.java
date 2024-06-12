@@ -18,12 +18,12 @@ public class CaricatoreLabirintoTest {
 	public void setUp() throws Exception {
 		
 		 monolocale = 
-				"Stanze: biblioteca\n"+
+				"Stanze: atrio\n"+
 				"Stanze magiche: \n"+
 				"Stanze buie: \n"+
 				"Stanze bloccate: \n"+
-				"Inizio: biblioteca\n"+
-				"Vincente: biblioteca\n"+
+				"Inizio: atrio\n"+
+				"Vincente: atrio\n"+
 				"Attrezzi: \n"+
 				"Uscite: \n"+
 				"Maghi: \n"+
@@ -32,13 +32,13 @@ public class CaricatoreLabirintoTest {
 		
 				
 		 bilocale = 
-				"Stanze: N12, N11\n"+
+				"Stanze: N10, N11\n"+
 				"Stanze magiche: \n"+
 				"Stanze buie: \n"+
 				"Stanze bloccate: \n"+
-				"Inizio: N12\n"+
+				"Inizio: N10\n"+
 				"Vincente: N11\n"+
-				"Attrezzi: martello 3 N12\n"+
+				"Attrezzi: martello 3 N10\n"+
 				"Uscite: \n"+
 				"Maghi: \n"+
 				"Cani: \n"+
@@ -52,15 +52,15 @@ public class CaricatoreLabirintoTest {
 		public void testMonolocale() throws FormatoFileNonValidoException, FileNotFoundException {
 			cl = new CaricatoreLabirinto(new StringReader(monolocale));
 			cl.carica();
-			assertEquals("biblioteca", this.cl.getStanzaIniziale().getNome());
-			assertEquals("biblioteca", this.cl.getStanzaVincente().getNome());
+			assertEquals("atrio", this.cl.getStanzaIniziale().getNome());
+			assertEquals("atrio", this.cl.getStanzaVincente().getNome());
 			}
 		
 		@Test
 		public void testBilocale() throws FormatoFileNonValidoException, FileNotFoundException {
 			cl = new CaricatoreLabirinto(new StringReader(bilocale));
 			cl.carica();
-			assertEquals("N12", this.cl.getStanzaIniziale().getNome());
+			assertEquals("N10", this.cl.getStanzaIniziale().getNome());
 			assertEquals("N11", this.cl.getStanzaVincente().getNome());
 			}
 		
