@@ -3,13 +3,13 @@ package it.uniroma3.diadia.comandi;
 import it.uniroma3.diadia.Partita;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 
-public class ComandoPrendi implements Comando {
+public class ComandoPrendi extends AbstractComando {
 	public String nomeComando;
 	private String NomeAttrezzo;
 	
 	
 	public ComandoPrendi() {
-		this.nomeComando="prendi";
+		super.setNome("prendi");
 	}
 	@Override
 	public void esegui(Partita partita) {
@@ -31,19 +31,11 @@ public class ComandoPrendi implements Comando {
 	}
 	
 
-
+	@Override
 	public void setParametro(String parametro) {
 		this.NomeAttrezzo=parametro;
 
 	}
 	
-	@Override
-	public String getNome() {
-		return this.nomeComando;
-	}
-	@Override
-	public String getParametro() {
-		return this.NomeAttrezzo;
-	}
 
 }

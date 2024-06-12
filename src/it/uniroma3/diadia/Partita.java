@@ -2,8 +2,13 @@
 package it.uniroma3.diadia;
 
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
+
+import it.uniroma3.diadia.ambienti.FormatoFileNonValidoException;
 import it.uniroma3.diadia.ambienti.Labirinto;
-import it.uniroma3.diadia.ambienti.LabirintoBuilder;
+
 import it.uniroma3.diadia.ambienti.Stanza;
 import it.uniroma3.diadia.giocatore.Giocatore;
 
@@ -21,17 +26,18 @@ public class Partita {
 	private boolean finita;
 	private Giocatore Giocatore1;
 	private IO io;
-	public Partita(IO io){
+	public Partita(IO io) throws FormatoFileNonValidoException, IOException{
 		this.io=io;
-		this.creastanze = new Labirinto();
-		this.creastanze.init();
+	
+		this.creastanze = new Labirinto("resources/l/labirinto.txt");
+		
 		Giocatore1=new Giocatore();
 		stanzaCorrente=creastanze.getStanzaIniziale();
 		this.finita = false;
 		
 	}
 	
-	public Partita(IO io,Labirinto labirinto){
+	public Partita(IO io,Labirinto labirinto) throws FileNotFoundException, IOException{
 		this.io=io;
 		this.creastanze =labirinto;
 		

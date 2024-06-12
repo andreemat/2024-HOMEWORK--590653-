@@ -1,10 +1,17 @@
 package it.uniroma3.diadia.giocatore;
+
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+
+import java.io.LineNumberReader;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.HashSet;
+
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeSet;
@@ -13,19 +20,30 @@ import it.uniroma3.diadia.attrezzi.Attrezzo;
 
 
 public class Borsa {
-	public final static int DEFAULT_PESO_MAX_BORSA = 10;
+	
+	
+	public int peso_borsa_default;
 	private List<Attrezzo> attrezzi;
-	private Map<Attrezzo,String> attrezzi2;
+
 	private int pesoMax;
 	
-	public Borsa() {
-		this(DEFAULT_PESO_MAX_BORSA); 
+	public Borsa() throws FileNotFoundException, IOException {
+		Properties prop = new Properties();
+		try {
+			
+		prop.load(new LineNumberReader(new FileReader(("resources/p/diadia.properties"))));
+		peso_borsa_default=(Integer.parseInt(prop.getProperty("peso_max_borsa")));}
+		catch(Exception e){
+			peso_borsa_default= 10;
+		}
+		this.pesoMax = peso_borsa_default;
+		this.attrezzi = new LinkedList<>(); 
 	}
 	
 	public Borsa(int pesoMax) {
 		this.pesoMax = pesoMax;
 		this.attrezzi = new LinkedList<>(); 
-		this.attrezzi2 = new HashMap<Attrezzo,String>();
+		
 		
 		
 		
@@ -84,8 +102,10 @@ public class Borsa {
 			s.append("Contenuto borsa ("+this.getPeso()+"kg/"+this.getPesoMax()+"kg): ");
 			for (Attrezzo a:this.attrezzi)
 				s.append(a.getNome().toString()+" ");
+			
 		} else
 			s.append("Borsa vuota");
+			
 			return s.toString();
 	}
 	

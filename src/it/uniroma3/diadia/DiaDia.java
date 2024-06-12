@@ -1,13 +1,16 @@
 package it.uniroma3.diadia;
 
-import it.uniroma3.diadia.ambienti.Labirinto;
-import it.uniroma3.diadia.ambienti.LabirintoBuilder;
-import it.uniroma3.diadia.ambienti.Stanza;
-import it.uniroma3.diadia.attrezzi.Attrezzo;
-import it.uniroma3.diadia.comandi.Comando;
-import it.uniroma3.diadia.comandi.FabbricaDiComandi;
-import it.uniroma3.diadia.comandi.FabbricaDiComandiFisarmonica;;
 
+import java.io.FileNotFoundException;
+
+import java.io.IOException;
+import java.util.Scanner;
+
+import it.uniroma3.diadia.ambienti.FormatoFileNonValidoException;
+import it.uniroma3.diadia.ambienti.Labirinto;
+import it.uniroma3.diadia.comandi.AbstractComando;
+import it.uniroma3.diadia.comandi.FabbricaDiComandi;
+import it.uniroma3.diadia.comandi.FabbricaDiComandiRiflessiva;
 
 /**
  * Classe principale di diadia, un semplice gioco di ruolo ambientato al dia.
@@ -34,25 +37,30 @@ import it.uniroma3.diadia.comandi.FabbricaDiComandiFisarmonica;;
 	
 
 	private Partita partita;
-	private IO io;
+	private  IO io;
 	
-	public DiaDia(IO io) {
+	public DiaDia(IO io) throws FormatoFileNonValidoException, IOException {
 		this.io=io;
 		this.partita = new Partita(io);
+		
 	}
-	public DiaDia(IO io,Labirinto labirinto) {
+	public DiaDia(IO io,Labirinto labirinto) throws FileNotFoundException, IOException {
 		this.io=io;
 		this.partita = new Partita(io,labirinto);
 	}
 
-	public void gioca() {
+	public void gioca(Scanner scannerDiLinee) {
 		String istruzione; 
 
 		io.mostraMessaggio(MESSAGGIO_BENVENUTO);
+				do		{
+					String riga = scannerDiLinee.nextLine(); 
+					istruzione=riga;
+					}
+				while (!processaIstruzione(istruzione));
+				
+			
 		
-		do		
-			istruzione=io.leggiRiga();
-		while (!processaIstruzione(istruzione));
 	}   
 
 
@@ -62,8 +70,8 @@ import it.uniroma3.diadia.comandi.FabbricaDiComandiFisarmonica;;
 	 * @return true se l'istruzione e' eseguita e il gioco continua, false altrimenti
 	 */
 	private boolean processaIstruzione(String istruzione) {
-		Comando comandoDaEseguire;
-		FabbricaDiComandi factory = new FabbricaDiComandiFisarmonica();
+		AbstractComando comandoDaEseguire;
+		FabbricaDiComandi factory = new FabbricaDiComandiRiflessiva();
 		comandoDaEseguire = factory.costruisciComando(istruzione);
 		comandoDaEseguire.esegui(this.partita) ;
 		if (this.partita.vinta())
@@ -74,20 +82,15 @@ import it.uniroma3.diadia.comandi.FabbricaDiComandiFisarmonica;;
 	}
 
 
-	public static void main(String[] argc) {
+	public static void main(String[] argc) throws FileNotFoundException, FormatoFileNonValidoException, IOException {		
 		IO io =new IOconsole();
-	
-		Stanza b = new Stanza("Stanza2");
-		Labirinto labirinto = new LabirintoBuilder()
-			.addStanzaIniziale("LabCampusOne") 
-			.addStanza("Stanza2") 
-			.addAdiacenza("LabCampusOne","Stanza2","ovest") 
-			.addAdiacenza("Stanza2","LabCampusOne","est") 
-			.addAttrezzo("Spada",2)
-			.getLabirinto();
-		DiaDia gioco = new DiaDia(io,labirinto);
 
+		DiaDia gioco = new DiaDia(io);
+	
+		try(Scanner scannerDiLinee = new Scanner(System.in)){ 
+			gioco.gioca(scannerDiLinee);
+				
+			}
 		
-		gioco.gioca();
 	}
 }
